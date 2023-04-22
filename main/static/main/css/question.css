@@ -67,3 +67,31 @@ button {
     font-weight: bold;
     margin-bottom:10px;
 }
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.label2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom:10px;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.checkbox-container1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 600px;
+  margin: 0 auto;
+}
+.checkbox-container1 > * {
+  margin-bottom: 10px; /* 원하는 간격 값으로 조정 */
+}
+

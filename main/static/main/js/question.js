@@ -40,3 +40,4 @@ function showSlides(n) {
     nextButton.style.display = "block";
   }
 }
+
