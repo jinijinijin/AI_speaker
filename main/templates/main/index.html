@@ -1,29 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>나의 취향 찾기</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-{% load static %}
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-
+    <title>Main</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/login1.css' %}">
 </head>
 <body>
-<a href='/question' button type="button" class="btn btn-secondary btn-lg btn-block" >성향TEST</a></button>
-<h4 class="page-subtitle">
-    capston project
-</h4>
+    <div class="container right-panel-active">
 
-<h1 class="page-title">
-    ★mbti 찾기★
-</h1>
-<a href="/question" class="btn btn-orange">
-    성격 찾으러 가기♥
-</a>
+    <form class="form" >
+        <h2 class="formtitle">성향 찾으러 가기</h2>
+
+        <a href="/question" class="btn">GO</a>
+    </form>
+
+</div>
 
 </body>
 </html>

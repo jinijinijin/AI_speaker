@@ -23,3 +23,16 @@ def login(request):
         request,
         'main/login.html',
     )
+
+
+from django.http import HttpResponse
+
+def question_view(request):
+    # question.js 파일의 내용을 문자열로 읽어온다.
+    with open('main/static/main/js/question.js', 'r') as file:
+        question_js_content = file.read()
+
+    # HttpResponse 객체를 생성하여 question.js 파일의 내용과 MIME 유형을 설정한다.
+    response = HttpResponse(question_js_content)
+    response['Content-Type'] = 'text/javascript'
+    return response
