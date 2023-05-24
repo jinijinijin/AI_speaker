@@ -2,7 +2,7 @@ from gtts import gTTS
 import os
 
 # TTS를 생성할 텍스트
-text = "안녕하세요. TTS 예제입니다."
+text = "오늘은 기분이 좋아보이시네요 좋은일 있으신가요?"
 
 # gTTS 객체 생성
 tts = gTTS(text=text, lang='ko')
