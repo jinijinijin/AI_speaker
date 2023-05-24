@@ -1,21 +1,23 @@
 from django.shortcuts import render
 
+
 def index(request):
     return render(
         request,
         'main/index.html',
+
     )
 
-def question(request):
+def main(request):
+    return render(
+        request,
+        'main/main.html',
+    )
+
+def questions(request):
     return render(
         request,
         'main/question.html',
-    )
-
-def result(request):
-    return render(
-        request,
-        'main/result.html',
     )
 
 def login(request):
@@ -23,6 +25,14 @@ def login(request):
         request,
         'main/login.html',
     )
+
+
+def result(request):
+    return render(
+        request,
+        'main/result.html',
+    )
+
 
 
 from django.http import HttpResponse
