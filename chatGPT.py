@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 # Set your OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 
 messages = []
 

@@ -1,2 +1,2 @@
-표정: happy
-만족도: good
+표정: neutral
+만족도: not bad
