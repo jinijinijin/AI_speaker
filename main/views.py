@@ -3,8 +3,8 @@ from .models import User
 from django.http import HttpResponse
 
 
-#def index(request):
-#    return render(request, 'main/index.html')
+def index(request):
+    return render(request, 'main/index.html')
 
 
 def main(request):
@@ -14,6 +14,28 @@ def main(request):
 def questions(request):
     return render(request, 'main/question.html')
 
+
+
+from django.shortcuts import render, redirect
+from .forms import LoginForm
+
+#def index(request):
+#    if request.method == 'POST':
+#        form = LoginForm(request.POST)
+#        if form.is_valid():
+#            # 로그인 처리
+#            login_name = form.cleaned_data['login_name']
+#            login_phone_number = form.cleaned_data['login_phone_number']
+#           # 여기서 로그인 처리를 구현하면 됩니다.
+            # 유효한 로그인인지 검증하고 성공하면 로그인 성공 페이지로 리다이렉트할 수 있습니다.
+#            return redirect('sign')
+#    else:
+#        form = LoginForm()
+#    return render(request, 'main/index.html', {'form': form})
+
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 
 def sign(request):
     if request.method == 'POST':
@@ -30,57 +52,61 @@ def sign(request):
 
     return render(request, 'main/login.html')
 
-from django.shortcuts import render, redirect
-from .forms import LoginForm
-
-def index(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            # 로그인 처리
-            login_name = form.cleaned_data['login_name']
-            login_phone_number = form.cleaned_data['login_phone_number']
-            # 여기서 로그인 처리를 구현하면 됩니다.
-            # 유효한 로그인인지 검증하고 성공하면 로그인 성공 페이지로 리다이렉트할 수 있습니다.
-            return redirect('sign')
-    else:
-        form = LoginForm()
-    return render(request, 'main/index.html', {'form': form})
-
-def signup(request):
-    if request.method == 'POST':
-        # 회원가입 처리
-        name = request.POST.get('name')
-        phone_number = request.POST.get('phone_number')
-        # 여기서 회원가입 처리를 구현하면 됩니다.
-        # 회원가입이 완료되면 회원가입 성공 페이지로 이동할 수 있습니다.
-        return redirect('sign')
-    return render(request, 'main/login.html')
-
-
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django import forms
-
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('login_name')
-        password = request.POST.get('login_phone_number')
-
-        if not username or not password:
-            error_message = "이름과 전화번호를 모두 입력해주세요."
-            return render(request, 'main/login.html', {'error_message': error_message})
-
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('index')  # 로그인 후 리다이렉트할 URL
-        else:
-            error_message = "유효하지 않은 사용자 이름 또는 비밀번호입니다."
-            return render(request, 'main/login.html', {'error_message': error_message})
-
-    return render(request, 'main/login.html')
-
 
 def result(request):
     return render(request, 'main/result.html')
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+# views.py
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from main.models import User
+from django.contrib.auth import get_user_model, authenticate, login
+from django.shortcuts import render, redirect
+
+from .models import User
+from django.contrib.auth import authenticate, login
+
+from .models import User
+from django.contrib.auth import authenticate, login
+
+def login_register(request):
+    if request.method == 'POST':
+        if 'register' in request.POST:  # 회원가입 요청인 경우
+            name = request.POST['name']
+            phone_number = request.POST['phone_number']
+
+            # 중복 여부 체크
+            if User.objects.filter(name=name).exists():
+                return render(request, 'main/login.html', {'message': '이미 존재하는 사용자입니다.'})
+
+            # 사용자 생성
+            user = User(name=name, phone_number=phone_number)
+            user.save()
+
+            # 회원가입 성공 시 로그인 처리
+            login(request, user)
+
+            # 회원가입 및 로그인 성공 시 리다이렉트
+            return redirect('index')  # or redirect('main:index')
+
+        elif 'login' in request.POST:  # 로그인 요청인 경우
+            login_name = request.POST['login_name']
+            login_phone_number = request.POST['login_phone_number']
+
+            user = authenticate(request, username=login_name, password=login_phone_number)
+            if user is not None:
+                login(request, user)
+                # 로그인 성공 시 리다이렉트
+                return redirect('index')  # or redirect('main:index')
+            else:
+                # 로그인 실패 시 처리할 내용
+                return render(request, 'main/login.html', {'message': '로그인에 실패하였습니다.'})
+
+    return render(request, 'main/login.html')
