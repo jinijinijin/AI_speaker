@@ -14,29 +14,6 @@ def main(request):
 def questions(request):
     return render(request, 'main/question.html')
 
-
-
-from django.shortcuts import render, redirect
-from .forms import LoginForm
-
-#def index(request):
-#    if request.method == 'POST':
-#        form = LoginForm(request.POST)
-#        if form.is_valid():
-#            # 로그인 처리
-#            login_name = form.cleaned_data['login_name']
-#            login_phone_number = form.cleaned_data['login_phone_number']
-#           # 여기서 로그인 처리를 구현하면 됩니다.
-            # 유효한 로그인인지 검증하고 성공하면 로그인 성공 페이지로 리다이렉트할 수 있습니다.
-#            return redirect('sign')
-#    else:
-#        form = LoginForm()
-#    return render(request, 'main/index.html', {'form': form})
-
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-
 def sign(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -56,22 +33,11 @@ def sign(request):
 def result(request):
     return render(request, 'main/result.html')
 
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-# views.py
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from main.models import User
-from django.contrib.auth import get_user_model, authenticate, login
+
 from django.shortcuts import render, redirect
 
-from .models import User
-from django.contrib.auth import authenticate, login
 
 from .models import User
 from django.contrib.auth import authenticate, login
@@ -94,7 +60,7 @@ def login_register(request):
             login(request, user)
 
             # 회원가입 및 로그인 성공 시 리다이렉트
-            return redirect('index')  # or redirect('main:index')
+            return redirect('login')  # or redirect('main:index')
 
         elif 'login' in request.POST:  # 로그인 요청인 경우
             login_name = request.POST['login_name']

@@ -1,17 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class UserInfo(models.Model):
-    phonenumber = models.IntegerField(primary_key=True)
-    name = models.TextField()
-    gender = models.TextField()
-    age = models.IntegerField(default=00)
-    accent = models.TextField()
-    # voice = models.TextField()
-    answer = models.TextField()
-    mbti = models.CharField(max_length=10, default='N/A')
-    hobby = models.TextField()
-    music = models.TextField()
 
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -39,6 +28,7 @@ class User(AbstractBaseUser):
     last_login = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    password = models.TextField(max_length=10)
 
     objects = UserManager()
 
