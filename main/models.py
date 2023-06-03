@@ -3,7 +3,10 @@ from django.db import models
 # Create your models here.
 
 
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,AbstractUser
+
+#from main import admin
+
 
 class UserManager(BaseUserManager):
     def create_user(self, name, password=None, **extra_fields):
@@ -28,6 +31,7 @@ class User(AbstractBaseUser):
     last_login = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     password = models.TextField(max_length=10)
 
     objects = UserManager()
