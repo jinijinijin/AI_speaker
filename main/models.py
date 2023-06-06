@@ -38,3 +38,15 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'name'
     REQUIRED_FIELDS = []
+
+class SurveyResponse(models.Model):
+    q1 = models.CharField(max_length=20)
+    q2 = models.CharField(max_length=20)
+    q3 = models.CharField(max_length=20)
+    q4 = models.CharField(max_length=20)
+    q5 = models.CharField(max_length=10)
+    q6 = models.CharField(max_length=10)
+    q7 = models.CharField(max_length=10)
+    q8 = models.CharField(max_length=10, default='')
+    q9 = models.CharField(max_length=10, default='')
+    q10 = models.CharField(max_length=100, default='')

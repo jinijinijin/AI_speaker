@@ -5,7 +5,7 @@
     <title>Title</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}">
-    
+    <script type="text/javascript" src="{% static 'main/js/login.js' %}"></script>
 </head>
 <body>
     <div class="container right-panel-active">
@@ -46,20 +46,60 @@
             <p>회원가입이 완료되었습니다.</p>
         </div>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const signInBtn = document.getElementById("signIn");
-            const signUpBtn = document.getElementById("signUp");
-            const container = document.querySelector(".container");
+       document.addEventListener('DOMContentLoaded', function () {
+    const signInBtn = document.getElementById("signIn");
+    const signUpBtn = document.getElementById("signUp");
+    const container = document.querySelector(".container");
 
-            signInBtn.addEventListener("click", () => {
-                container.classList.remove("right-panel-active");
-            });
+    signInBtn.addEventListener("click", () => {
+        container.classList.remove("right-panel-active");
+    });
 
-            signUpBtn.addEventListener("click", () => {
-                container.classList.add("right-panel-active");
-            });
-        });
+    signUpBtn.addEventListener("click", () => {
+        container.classList.add("right-panel-active");
+    });
+
+    const signUpForm = document.querySelector("#loginForm");
+    signUpForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const loginName = document.querySelector('input[name="login_name"]').value;
+        const loginPhoneNumber = document.querySelector('input[name="login_phone_number"]').value;
+        const signUpName = document.querySelector('input[name="name"]').value;
+        const signUpPhoneNumber = document.querySelector('input[name="phone_number"]').value;
+
+        if (loginName === signUpName && loginPhoneNumber === signUpPhoneNumber) {
+            // The login details are correct, update the form action URL and submit the form
+            signUpForm.action = "index/";
+            signUpForm.submit();
+
+            // Save user information to the database
+            saveUserInfo(loginName, loginPhoneNumber);
+        } else {
+            // The login details are incorrect, display an error message or take appropriate action
+            alert("로그인 정보가 올바르지 않습니다.");
+        }
+    });
+});
+
+function saveUserInfo(username, phoneNumber) {
+    // Perform a database query or API request to save the user information
+    // Assuming you have a database connection called `dbConnection` and a user's collection/table
+    dbConnection.collection('Users').insertOne({ name: name, phone_number: phoneNumber }, function(err, result) {
+        if (err) {
+            console.error("Error saving user information:", err);
+        } else {
+            console.log("User information saved successfully");
+        }
+    });
+}
+
+function showPopup() {
+    var popupContainer = document.getElementById('popupContainer');
+    popupContainer.style.display = 'block';
+}
+
     </script>
 </body>
 </html>

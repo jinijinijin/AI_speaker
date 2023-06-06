@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (loginName === signUpName && loginPhoneNumber === signUpPhoneNumber) {
       // The login details are correct, update the form action URL and submit the form
-      loginForm.action = "login/";
+      loginForm.action = "index/";
       loginForm.submit();
     } else {
       // The login details are incorrect, display an error message or take appropriate action
